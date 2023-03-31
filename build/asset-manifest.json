@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/birthdays/static/css/main.8af02aa4.css",
+    "main.css": "/birthdays/static/css/main.d7e92930.css",
     "main.js": "/birthdays/static/js/main.6f93cc4b.js",
     "index.html": "/birthdays/index.html",
-    "main.8af02aa4.css.map": "/birthdays/static/css/main.8af02aa4.css.map",
+    "main.d7e92930.css.map": "/birthdays/static/css/main.d7e92930.css.map",
     "main.6f93cc4b.js.map": "/birthdays/static/js/main.6f93cc4b.js.map"
   },
   "entrypoints": [
-    "static/css/main.8af02aa4.css",
+    "static/css/main.d7e92930.css",
     "static/js/main.6f93cc4b.js"
   ]
 }
