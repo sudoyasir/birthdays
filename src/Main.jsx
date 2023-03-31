@@ -2,7 +2,6 @@ import BirthdayCard from "./BirthdayCard"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2'
-import { useNavigate } from "react-router";
 
 export default function Main() {
     const [friends, setFriends] = useState('')
@@ -12,7 +11,6 @@ export default function Main() {
     const [file, setFile] = useState('')
     const [pin, setPin] = useState('')
 
-    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -50,7 +48,6 @@ export default function Main() {
                   .catch((err) => {
                     console.log(err);
                   });
-                navigate('/'); // navigate back to the homepage
               })
             }).catch((error) => {
               console.log(error.message)
