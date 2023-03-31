@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato:wght@400;700;900&display=swap');
+
+body{
+    font-family: Lato;
+    background: linear-gradient(45deg, #ae69f8, #225789);
+}
+h1{
+    font-family: 'Dancing Script', cursive;
+    color: white;
+
+}
+.center-container{
+    margin: auto ;
+    text-align: center;
+    background-color: #00000081;
+    padding: 30px;
+    border-radius: 20px;
+    width: 60%;
+    transition: .8s all;
+}
+.floating-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rebeccapurple;
+    color: white;
+    border: 3px solid white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    font-size: 2rem;
+    box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.501);
+  }
+  .floating-button button{
+    transition: .5s all;
+  }
+  .floating-button button:hover {
+    background-color: orange;
+  }
+  .card {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
+  }
+  .friendname{
+    margin-top: 10px;
+
+  }
+  .birthdate{
+    margin-top: 10px;
+  }
+
+body  {
+    background-image: url('https://static.pexels.com/photos/414171/pexels-photo-414171.jpeg');
+  background-size:cover;
+        -webkit-animation: slidein 100s;
+        animation: slidein 100s;
+
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+
+        -webkit-animation-direction: alternate;
+        animation-direction: alternate;              
+}
+
+@-webkit-keyframes slidein {
+from {background-position: top; background-size:3000px; }
+to {background-position: -100px 0px;background-size:2750px;}
+}
+
+@keyframes slidein {
+from {background-position: top;background-size:3000px; }
+to {background-position: -100px 0px;background-size:2750px;}
+
+}
+input{
+    background-color: orange !important;
+}
+
+
+
+
+@media screen and (max-width: 754px) {
+    .center-container{
+        width: 90% !important;
+    }
+    .friendname{
+        font-size: 30px;
+        margin-top: 10px;
+    }
+    .card{
+        padding: 20px;
+        border-radius: 10px !important;
+    }
+}
