@@ -78,11 +78,13 @@ from {background-position: top;background-size:3000px; }
 to {background-position: -100px 0px;background-size:2750px;}
 
 }
-input{
-    background-color: orange !important;
+.friendImg{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px #17cf6b solid;
 }
-
-
 
 
 @media screen and (max-width: 754px) {

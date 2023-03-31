@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import dummyImg from './img/download.png'
 
 export default function BirthdayCard({ friends }) {
     const [selectedEmojis, setSelectedEmojis] = useState([]);
@@ -58,17 +59,13 @@ export default function BirthdayCard({ friends }) {
     return (
         <>
             {Array.isArray(icons) &&
-                icons.map(({ friend, iconClass, color }) => (
+                icons.map(({ friend }) => (
                     <div className="card mb-2" key={friend._id}>
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-md-3 m-auto">
                                     <div className="align-self-center">
-                                        <i
-                                            className={`${iconClass} fa-3x me-4`}
-                                            style={{ color: color }}
-                                            onClick={() => handleEmojiSelect(iconClass)}
-                                        ></i>
+                                        <img src={(friend.hasOwnProperty('photo') == true) ? friend.photo : dummyImg} className='friendImg' alt="" />
                                     </div>
                                 </div>
                                 <div className="col-md-5 m-auto">
@@ -105,9 +102,6 @@ export default function BirthdayCard({ friends }) {
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
                     </div>
                 ))}
