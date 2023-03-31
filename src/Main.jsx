@@ -43,7 +43,6 @@ export default function Main() {
                 setDob('')
                 setMessage('')
                 document.getElementById("friendimg").value = "";
-                // Retrieve updated list of friends and update state
                 axios.get("https://yasirs-birthday-remainder.herokuapp.com/friends")
                   .then((resp) => {
                     setFriends(resp.data.friends);
@@ -77,7 +76,7 @@ export default function Main() {
     
       
     useEffect(() => {
-        axios.get("http://localhost:3000/friends")
+        axios.get("https://yasirs-birthday-remainder.herokuapp.com/friends")
             .then((resp) => {
                 console.log(resp.data.friends)
                 setFriends(resp.data.friends)
