@@ -44,6 +44,12 @@ h1 {
   background-color: orange;
 }
 
+.spinner-border {
+  position: absolute;
+  left: 35%;
+  top: 2px;
+}
+
 .card {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
