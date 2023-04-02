@@ -1,113 +1,69 @@
-import { useEffect, useState } from "react";
-import dummyImg from './img/download.png'
+import dummyImg from './img/download.png';
 
 export default function BirthdayCard({ friends }) {
-    const [selectedEmojis, setSelectedEmojis] = useState([]);
-    const [icons, setIcons] = useState([]);
-
-    useEffect(() => {
-        const iconClasses = ["fa fa-birthday-cake", "fa fa-gift", "fa fa-heart", "fa fa-smile", "fa fa-star", "fa fa-sun", "fa fa-moon", "fa fa-tree", "fa fa-cloud", "fa fa-utensils", "fa fa-champagne-glasses", "fa fa-cake-candles"];
-
-        const availableEmojis = iconClasses.slice();
-        const colors = generateRandomColors(availableEmojis.length);
-
-        if (Array.isArray(friends)) {
-            const icons = friends.map((friend) => {
-                const randomIndex = Math.floor(Math.random() * availableEmojis.length);
-                const selectedEmoji = availableEmojis[randomIndex];
-                availableEmojis.splice(randomIndex, 1);
-
-                return {
-                    friend,
-                    iconClass: selectedEmoji,
-                    color: colors[randomIndex],
-                };
-            });
-
-            setIcons(icons);
-        }
-    }, [friends]);
-
-    function generateRandomColors(count) {
-        const colors = [];
-
-        for (let i = 0; i < count; i++) {
-            colors.push(getRandomColor());
-        }
-
-        return colors;
+  // Calculate the number of days remaining for each friend's birthday
+  const friendsWithDaysRemaining = friends.map((friend) => {
+    const birthdate = new Date(friend.birthday);
+    const today = new Date();
+    const nextBirthday = new Date(today.getFullYear(), birthdate.getMonth(), birthdate.getDate());
+    if (nextBirthday < today) {
+      nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
     }
+    const diffDays = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
+    return { ...friend, daysRemaining: diffDays };
+  });
 
-    function getRandomColor() {
-        const letters = "0123456789ABCDEF";
-        let color = "#";
+  // Sort the list of friends based on the number of days remaining
+  const sortedFriends = friendsWithDaysRemaining.sort((a, b) => a.daysRemaining - b.daysRemaining);
 
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
+  // Format birthdate as "2nd February"
+  const formatDate = (date) => {
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const suffix = ['th', 'st', 'nd', 'rd'][day % 10 > 3 ? 0 : (day % 100 - day % 10 !== 10) * day % 10];
+    return `${day}${suffix} ${month}`;
+  };
 
-        return color;
-    }
-
-    function handleEmojiSelect(emoji) {
-        setSelectedEmojis([...selectedEmojis, emoji]);
-    }
-
-
-
-
-    return (
-        <>
-            {Array.isArray(icons) &&
-                icons.map(({ friend }) => (
-                    <div className="card mb-2" key={friend._id}>
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="col-md-3 m-auto">
-                                    <div className="align-self-center">
-                                        <img src={(friend.hasOwnProperty('photo') == true) ? friend.photo : dummyImg} className='friendImg' alt="" />
-                                    </div>
-                                </div>
-                                <div className="col-md-5 m-auto">
-                                    <div className="align-self-center text-center">
-                                        <h4 className="fw-bolder friendname">{friend.name}</h4>
-                                        <p
-                                            className="mb-0 text-secondary"
-                                            style={{
-                                                maxHeight: "40px",
-                                                overflow: "hidden",
-                                                textOverflow: "ellipsis",
-                                            }}
-                                        >
-                                            {(() => {
-                                                var birthdate = new Date(friend.birthday);
-
-                                                var today = new Date();
-                                                var nextBirthday = new Date(today.getFullYear(), birthdate.getMonth(), birthdate.getDate());
-                                                if (nextBirthday < today) {
-                                                    nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
-                                                }
-                                                var diffDays = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
-
-                                                return diffDays;
-                                            })()}
-                                            {" "}Days remaining
-                                        </p>
-
-                                    </div>
-                                </div>
-                                <div className="col-md-4 m-auto">
-                                    <div className="">
-                                        <h5 className="mb-0 my-auto birthdate">{friend.birthday}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            <div className="floating-button">
-                <button className="floating-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-calendar-plus"></i></button>
+  return (
+    <>
+      {sortedFriends.map((friend) => (
+        <div className="card mb-2" key={friend._id}>
+          <div className="card-body">
+            <div className="row">
+              <div className="col-md-3 m-auto">
+                <div className="align-self-center">
+                  <img src={friend.photo || dummyImg} className="friendImg" alt="" />
+                </div>
+              </div>
+              <div className="col-md-5 m-auto">
+                <div className="align-self-center text-center">
+                  <h4 className="fw-bolder friendname">{friend.name}</h4>
+                  <p
+                    className="mb-0 text-secondary"
+                    style={{
+                      maxHeight: '40px',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    <i className='fa fa-clock '></i> {friend.daysRemaining} Days remaining
+                  </p>
+                </div>
+              </div>
+              <div className="col-md-4 m-auto">
+                <div className="">
+                  <h5 className="mb-0 my-auto birthdate"><i className='fa fa-cake text-danger'></i> {formatDate(new Date(friend.birthday))}</h5>
+                </div>
+              </div>
             </div>
-        </>
-    );
+          </div>
+        </div>
+      ))}
+      <div className="floating-button">
+        <button className="floating-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <i className="fa-solid fa-calendar-plus"></i>
+        </button>
+      </div>
+    </>
+  );
 }

@@ -5,13 +5,14 @@ import Swal from 'sweetalert2'
 import Spinner from './Spinner'
 
 export default function Main() {
-  const [friends, setFriends] = useState('')
+  const [friends, setFriends] = useState([])
   const [name, setName] = useState('');
   const [dob, setDob] = useState('')
   const [message, setMessage] = useState('')
   const [file, setFile] = useState('')
   const [pin, setPin] = useState('')
-  const [loading, setLoading] = useState(false) // Add loading state
+  const [loading, setLoading] = useState(false)
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -23,14 +24,13 @@ export default function Main() {
 
     if (pin === "2002") {
       if (name && dob && file) {
-        setLoading(true) // Set loading to true
+        setLoading(true)
         axios.post("https://52.62.230.74/friend/create", form, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
         }).then((res) => {
           setLoading(false)
-          console.log(res);
           Swal.fire({
             position: 'top-end',
             icon: 'success',
@@ -39,7 +39,6 @@ export default function Main() {
             timer: 1800,
             timerProgressBar: true
           }).then((res) => {
-             // Set loading to false
             setPin('')
             setName('')
             setDob('')
@@ -48,7 +47,6 @@ export default function Main() {
             document.getElementById("friendimg").value = "";
             axios.get("https://52.62.230.74/friends")
               .then((resp) => {
-                setFriends(resp.data.friends);
               })
               .catch((err) => {
                 console.log(err);
@@ -84,26 +82,27 @@ export default function Main() {
   useEffect(() => {
     axios.get("https://52.62.230.74/friends")
       .then((resp) => {
-        console.log(resp.data.friends)
         setFriends(resp.data.friends)
-        console.log(resp)
       })
       .catch((err) => {
         console.log(err);
       })
   }, [])
 
+
+
+
   return (
     <>
       <div className="center-container my-5">
         <h1 className="text-center mb-5">Birthdays Remainder</h1>
         <div className="row" >
-          <BirthdayCard friends={friends} />
+            <BirthdayCard key={friends._id} friends={friends} />
         </div>
       </div>
-      
 
-      <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+      <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content" style={{ backgroundColor: "#4E6E81" }}>
             <div className="modal-body">

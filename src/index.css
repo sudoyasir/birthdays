@@ -6,8 +6,10 @@ body {
 }
 
 h1 {
-  font-family: 'Dancing Script', cursive;
   color: white;
+  font-weight: bolder;
+  text-transform: uppercase;
+  letter-spacing: 5px;
 
 }
 
@@ -15,7 +17,7 @@ h1 {
   margin: auto;
   text-align: center;
   background-color: #00000081;
-  padding: 30px;
+  padding: 30px 50px;
   border-radius: 20px;
   width: 60%;
   transition: .8s all;
@@ -53,8 +55,8 @@ h1 {
 .card {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  border-top-left-radius: 60px;
-  border-bottom-left-radius: 60px;
+  border-top-left-radius: 70px;
+  border-bottom-left-radius: 70px;
 }
 
 .friendname {
@@ -64,12 +66,13 @@ h1 {
 
 .birthdate {
   margin-top: 10px;
+  font-weight: bold;
 }
 
 body {
   background-image: url('https://static.pexels.com/photos/414171/pexels-photo-414171.jpeg');
   background-size: cover;
-  background-attachment: scroll;
+  background-attachment: fixed; /* Change to 'fixed' */
   -webkit-animation: slidein 100s;
   animation: slidein 100s;
 
