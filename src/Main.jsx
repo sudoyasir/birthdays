@@ -24,7 +24,7 @@ export default function Main() {
     if (pin === "2002") {
       if (name && dob && file) {
         setLoading(true) // Set loading to true
-        axios.post("http://ec2-52-62-230-74.ap-southeast-2.compute.amazonaws.com:3000/friend/create", form, {
+        axios.post("https://52.62.230.74/friend/create", form, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
@@ -46,7 +46,7 @@ export default function Main() {
             setMessage('')
             setFile('')
             document.getElementById("friendimg").value = "";
-            axios.get("http://ec2-52-62-230-74.ap-southeast-2.compute.amazonaws.com:3000/friends")
+            axios.get("https://52.62.230.74/friends")
               .then((resp) => {
                 setFriends(resp.data.friends);
               })
@@ -82,7 +82,7 @@ export default function Main() {
 
 
   useEffect(() => {
-    axios.get("http://ec2-52-62-230-74.ap-southeast-2.compute.amazonaws.com:3000/friends")
+    axios.get("https://52.62.230.74/friends")
       .then((resp) => {
         console.log(resp.data.friends)
         setFriends(resp.data.friends)
