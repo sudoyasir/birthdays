@@ -21,7 +21,8 @@ export default function BirthdayCard({ friends }) {
     const day = date.getDate();
     const month = date.toLocaleString('default', { month: 'long' });
     const suffix = ['th', 'st', 'nd', 'rd'][day % 10 > 3 ? 0 : (day % 100 - day % 10 !== 10) * day % 10];
-    return `${day}${suffix} ${month}`;
+    return <>{day}<sup>{suffix}</sup> {month}</>;
+
   };
 
   return (
