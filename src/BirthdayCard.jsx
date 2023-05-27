@@ -47,7 +47,7 @@ export default function BirthdayCard({ friends }) {
                       textOverflow: 'ellipsis',
                     }}
                   >
-                    <i className='fa fa-clock '></i> {friend.daysRemaining} Days remaining
+                    <i class="fa fa-hourglass-half text-info"></i> {friend.daysRemaining} Days remaining
                   </p>
                 </div>
               </div>
